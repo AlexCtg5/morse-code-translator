@@ -1,0 +1,72 @@
+.input-text {
+  height: 2rem;
+  width: 23rem;
+  font-size: 1rem;
+  border: white 0.01rem solid;
+  background-color: transparent;
+  color: white;
+  padding-left: 0.5rem;
+}
+
+.output-text {
+  height: 10rem;
+  width: 23rem;
+  font-size: 1.4rem;
+  overflow: hidden;
+  border: white 0.01rem solid;
+
+  color: white;
+  padding-left: 0.5rem;
+}
+
+.morse-container h1 {
+  font-size: 1.1rem;
+  color: #bc6ff1;
+}
+
+.morse-container {
+  padding: 1rem 1rem 0rem 1rem;
+  display: flex;
+}
+
+.copy-btn {
+  background-color: transparent;
+  color: #bc6ff1;
+  margin-top: 0.5rem;
+  background-color: transparent;
+  border: white 0.01rem solid;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #bc6ff1;
+  color: white;
+}
+
+.title {
+  font-size: 2rem;
+  color: white;
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+
+.span-title {
+  color: #bc6ff1;
+}
+
+.morse-container p {
+  font-size: 1.1rem;
+  color: white;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.morse-table {
+  font-size: 1rem;
+  color: white;
+  margin-left: 1rem;
+}
+
+table th {
+  width: 5rem;
+}
