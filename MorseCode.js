@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 
 export default function MorseCode() {
   const [outputResult, setOutputResult] = useState("");
+  const [translateMorse, setTranslateMorse] = useState(true);
   const letterToMorse = {
     a: ".-",
     b: "-...",
@@ -60,10 +61,79 @@ export default function MorseCode() {
     "@": ".--.-.",
     " ": "/",
   };
+  const morseToLetter = {
+    ".-": "a",
+    "-...": "b",
+    "-.-.": "c",
+    "-..": "d",
+    ".": "e",
+    "..-.": "f",
+    "--.": "g",
+    "....": "h",
+    "..": "i",
+    ".---": "j",
+    "-.-": "k",
+    ".-..": "l",
+    "--": "m",
+    "-.": "n",
+    "---": "o",
+    ".--.": "p",
+    "--.-": "q",
+    ".-.": "r",
+    "...": "s",
+    "-": "t",
+    "..-": "u",
+    "...-": "v",
+    ".--": "w",
+    "-..-": "x",
+    "-.--": "y",
+    "--..": "z",
+    "-----": "0",
+    ".----": "1",
+    "..---": "2",
+    "...--": "3",
+    "....-": "4",
+    ".....": "5",
+    "-....": "6",
+    "--...": "7",
+    "---..": "8",
+    "----.": "9",
+    ".-.-.-": ".",
+    "--..--": ",",
+    "..--..": "?",
+    ".----.": "'",
+    "-.-.--": "!",
+    "-..-.": "/",
+    "-.--.": "(",
+    "-.--.-": ")",
+    ".-...": "&",
+    "---...": ":",
+    "-.-.-.": ";",
+    "-...-": "=",
+    ".-.-.": "+",
+    "-....-": "-",
+    "..--.-": "_",
+    ".-..-.": '"',
+    "...-..-": "$",
+    ".--.-.": "@",
+    "/": " ",
+  };
+  function switchTranslation() {
+    setTranslateMorse(!translateMorse);
+  }
+
+  const inputRef = useRef(null);
+
+  function clearText() {
+    setOutputResult("");
+    inputRef.current.value = "";
+  }
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    const converted = convertToMorse(inputValue);
+    const converted = translateMorse
+      ? convertToMorse(inputValue)
+      : convertToText(inputValue);
     setOutputResult(converted);
   };
 
@@ -73,6 +143,12 @@ export default function MorseCode() {
       (letter) => letterToMorse[letter] + " " || ""
     );
     return convertedArray;
+  }
+  function convertToText(morseCode) {
+    const morseWords = morseCode.split(" ");
+    const text = morseWords.map((morse) => morseToLetter[morse] || "").join("");
+
+    return text;
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -104,12 +180,28 @@ export default function MorseCode() {
               <input
                 className="input-text"
                 onChange={handleInputChange}
+                placeholder={translateMorse ? "Text to Morse" : "Morse to text"}
+                ref={inputRef}
               ></input>
             </div>
             <div className="output-container">
               <h1>Output:</h1>
               <div className="output-text">{outputResult}</div>
             </div>
+            <button
+              className="copy-btn"
+              onClick={switchTranslation}
+              style={{ marginRight: "0.5rem" }}
+            >
+              Switch
+            </button>
+            <button
+              className="copy-btn"
+              onClick={clearText}
+              style={{ marginRight: "0.5rem" }}
+            >
+              Clear
+            </button>
             <button className="copy-btn" onClick={copyText}>
               Copy
             </button>
